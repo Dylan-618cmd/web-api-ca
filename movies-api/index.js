@@ -8,6 +8,8 @@ import moviesRouter from './api/movies';
 
 dotenv.config();
 
+console.log('TMDB_KEY loaded:', process.env.TMDB_KEY ? 'Yes' : 'No');
+
 const errHandler = (err, req, res, next) => {
   /* if the error in development then send stack trace to display whole error,
   if it's in production then just send error message  */

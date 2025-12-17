@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import 'dotenv/config';
 
 export const getMovies = async () => {
     const response = await fetch(
@@ -14,6 +13,7 @@ export const getMovies = async () => {
 
 };
 
+//Individual Movie
 export const getMovie = async (id) => {
     const response = await fetch( 
     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}`
@@ -27,3 +27,30 @@ export const getMovie = async (id) => {
 
     return data;
 };
+
+//Genres
+export const getGenres = async () => {
+    const response = await fetch (
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.TMDB_KEY}&language=en-US`
+    );
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.status_message || 'Failed to fetch genres');
+    }
+
+    return await response.json();
+}
+
+//Get Upcoming
+export const getUpcoming = async () => {
+    const reponse = await fetch (
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    );
+
+     if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+    return await response.json();
+
+}
