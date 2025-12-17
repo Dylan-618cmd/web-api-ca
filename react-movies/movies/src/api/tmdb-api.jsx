@@ -101,10 +101,22 @@ export const getUpcomingMovies = async () => {
 };
 
 export const getTopRatedMovies = async () => {
-  const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`;
-  const res = await fetch(url);
-  return res.json();
+  return fetch(
+    `http://localhost:8080/api/movies/top-rated`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
 };
+
+
 
 export const getCurrentlyShowing = async () => {
   const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`;
