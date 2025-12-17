@@ -86,18 +86,18 @@ export const getPopular = async () => {
 }
 
 //Get Reccomended Movies
-//export const getRecommended = async () => {
-//    const response = await fetch (
-//        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.VITE_TMDB_KEY}&language=en-US&page=1`
-//    );
-//
-//    if (!response.ok) {
-//        const errorData = await response.json();
-//        throw new Error (errorData.status_message || 'Failed to fetch popular movies');
-//    }
-//
-//    return await response.json();
-//}
+export const getRecommended = async () => {
+    const response = await fetch (
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    );
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch popular movies');
+    }
+
+    return await response.json();
+}
 
 //Get Currently Showing
 export const getCurrentlyShowing = async () => {

@@ -19,7 +19,7 @@ router.get('/discover', asyncHandler(async (req, res) => {
 }));
 
 //Individual Movies
-router.get('/movie/:id', asyncHandler(async (req, res) => {
+router.get('/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     console.log("Backend got id:", id, typeof id);
     const movie = await getMovie(id);
