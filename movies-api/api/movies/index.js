@@ -28,7 +28,7 @@ router.get('/genres', asyncHandler(async (req, res) => {
 }));
 
 //Upcoming Movies
-router.get('upcoming', asyncHandler(async (req, res) => {
+router.get('/upcoming', asyncHandler(async (req, res) => {
     const upcomingMovies = await getUpcoming();
     res.status(200).json(upcomingMovies);
 }));

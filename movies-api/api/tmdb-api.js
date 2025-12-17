@@ -44,13 +44,14 @@ export const getGenres = async () => {
 
 //Get Upcoming
 export const getUpcoming = async () => {
-    const reponse = await fetch (
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    const response = await fetch (
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
     );
 
-     if (!response.ok) {
-        throw new Error(response.json().message);
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.status_message || 'Failed to fetch genres');
     }
-    return await response.json();
 
+    return await response.json();
 }

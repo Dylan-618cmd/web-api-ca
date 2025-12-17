@@ -85,10 +85,19 @@ export const getMovieReviews = ({ queryKey }) => {
   };
 
 export const getUpcomingMovies = async () => {
-  const url = `http://localhost:8080/api/movies/upcoming`
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Failed to fetch upcoming movies");
-  return res.json();
+  return fetch(
+    `http://localhost:8080/api/movies/upcoming`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
 };
 
 export const getTopRatedMovies = async () => {
