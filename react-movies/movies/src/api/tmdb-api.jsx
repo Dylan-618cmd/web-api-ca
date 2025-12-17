@@ -135,19 +135,42 @@ export const getPopular = async () => {
  });
 };
 
+//Recommended Movies
+export const getRecommended = async () => {
+  return fetch(
+    `http://localhost:8080/api/movies/recommended`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
+};
 
-
+//Currently Showing Movies
 export const getCurrentlyShowing = async () => {
-  const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`;
-  const res = await fetch(url);
-  return res.json();
+  return fetch(
+    `http://localhost:8080/api/movies/now-playing`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
 };
 
 
 
-export const getRecommendations = async ({ queryKey }) => {
-  const [, { id }] = queryKey;
-  const url = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`;
-  const res = await fetch(url);
-  return res.json();
-};
+
+
+

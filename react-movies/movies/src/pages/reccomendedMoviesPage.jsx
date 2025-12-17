@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from 'react-router';
-import { getRecommendations } from '../api/tmdb-api'
+import { getRecommended } from '../api/tmdb-api'
 import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
@@ -11,7 +11,7 @@ const RecommendedPage = () => {
  
   const { data, error, isPending, isError  } = useQuery({
     queryKey: ['recommendations', {id: id}],
-    queryFn: getRecommendations,
+    queryFn: getRecommended,
   })
 
   if (isPending) {
