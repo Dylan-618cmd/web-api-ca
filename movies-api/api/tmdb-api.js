@@ -68,4 +68,19 @@ export const getTopRated = async () => {
     }
 
     return await response.json();
+
+}
+
+//Get Popular Movies
+export const getPopular = async () => {
+    const response = await fetch (
+        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+    );
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch popular movies');
+    }
+
+    return await response.json();
 }

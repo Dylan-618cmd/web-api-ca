@@ -84,6 +84,7 @@ export const getMovieReviews = ({ queryKey }) => {
    });
   };
 
+//Upcoming Movies
 export const getUpcomingMovies = async () => {
   return fetch(
     `http://localhost:8080/api/movies/upcoming`
@@ -100,9 +101,27 @@ export const getUpcomingMovies = async () => {
  });
 };
 
+//Top Rated Movies
 export const getTopRatedMovies = async () => {
   return fetch(
     `http://localhost:8080/api/movies/top-rated`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
+};
+
+//Popular Movies
+export const getPopular = async () => {
+  return fetch(
+    `http://localhost:8080/api/movies/popular`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -124,11 +143,7 @@ export const getCurrentlyShowing = async () => {
   return res.json();
 };
 
-export const getPopular = async () => {
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`;
-  const res = await fetch(url);
-  return res.json();
-};
+
 
 export const getRecommendations = async ({ queryKey }) => {
   const [, { id }] = queryKey;
