@@ -28,6 +28,22 @@ export const getMovie = async (id) => {
     return data;
 };
 
+//Movie Images
+export const getMovieImages = async (id) => {
+
+    const response = await fetch (
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_KEY}`
+    );
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.status_message || "Something went wrong");
+    }
+
+    return await response.json();
+
+}
+
 //Genres
 export const getGenres = async () => {
     const response = await fetch (

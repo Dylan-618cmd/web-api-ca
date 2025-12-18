@@ -11,7 +11,7 @@ const MoviePage = (props) => {
   const { id } = useParams();
  
   const { data: movie, error, isPending, isError  } = useQuery({
-    queryKey: ['movie', {id: id}],
+    queryKey: ['movie', id],
     queryFn: () =>  getMovie(id),
   })
 

@@ -14,11 +14,28 @@ export const getMovies = () => {
   });
 };
 
-
+//Single Movie Details
 export const getMovie = (id) => {
   console.log("getMovie called with:", id, typeof id);
   return fetch(
-    `http://localhost:8080/api/movies/${id}`
+    `http://localhost:8080/api/movies/movie/${id}`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
+};
+
+//Movie Images
+export const getMovieImages = (id) => {
+  return fetch(
+    `http://localhost:8080/api/movies/movie/${id}/images`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -48,23 +65,6 @@ export const getMovie = (id) => {
    });
   };
 
- export const getMovieImages = ({ queryKey }) => {
-    const [, idPart] = queryKey;
-    const { id } = idPart;
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    ).then( (response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error
-   });
-  };
 
 export const getMovieReviews = ({ queryKey }) => {
     const [, idPart] = queryKey;

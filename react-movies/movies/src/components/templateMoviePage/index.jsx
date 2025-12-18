@@ -11,7 +11,7 @@ const TemplateMoviePage = ({ movie, children }) => {
 
     const { data, error, isPending, isError } = useQuery({
     queryKey: ['images', { id: movie.id }],
-    queryFn: getMovieImages,
+    queryFn: () => getMovieImages(movie.id),
   });
 
   if (isPending) {

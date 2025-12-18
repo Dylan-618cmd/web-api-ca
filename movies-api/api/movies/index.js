@@ -8,6 +8,7 @@ import { getTopRated } from '../tmdb-api';
 import { getPopular } from '../tmdb-api';
 import { getRecommended } from '../tmdb-api';
 import { getCurrentlyShowing } from '../tmdb-api';
+import { getMovieImages } from '../tmdb-api';
 
 
 const router = express.Router();
@@ -19,11 +20,18 @@ router.get('/discover', asyncHandler(async (req, res) => {
 }));
 
 //Individual Movies
-router.get('/:id', asyncHandler(async (req, res) => {
+router.get('/movie/:id', asyncHandler(async (req, res) => {
     const {id} = req.params;
     console.log("Backend got id:", id, typeof id);
     const movie = await getMovie(id);
     res.status(200).json(movie);
+}));
+
+//Movie Images
+router.get('/movie/:id/images', asyncHandler(async (req, res) => {
+    const {id} = req.params;
+    const images = await getMovieImages(id);
+    res.status(200).json(images);
 }));
 
 //Movie genres
