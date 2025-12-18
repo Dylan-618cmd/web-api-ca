@@ -9,6 +9,7 @@ import { getPopular } from '../tmdb-api';
 import { getRecommended } from '../tmdb-api';
 import { getCurrentlyShowing } from '../tmdb-api';
 import { getMovieImages } from '../tmdb-api';
+import { getMovieReviews } from '../tmdb-api';
 
 
 const router = express.Router();
@@ -69,6 +70,13 @@ router.get('/:id/recommendations', asyncHandler (async (req, res) => {
 router.get('/now-playing', asyncHandler (async (erq, res) => {
     const nowPlaying = await getCurrentlyShowing();
     res.status(200).json(nowPlaying);
+}));
+
+//Movie Reviews
+router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
+    const {id} = req.params;
+    const movieReviews = await getMovieReviews(id);
+    res.status(200).json(movieReviews);
 }));
 
 export default router;

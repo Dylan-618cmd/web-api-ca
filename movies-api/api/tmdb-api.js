@@ -128,3 +128,17 @@ export const getCurrentlyShowing = async () => {
 
     return await response.json();
 }
+
+//Get Movie Reviews
+export const getMovieReviews = async (id) => {
+    const response = await fetch (
+        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+    )
+
+        if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch reviews');
+    }
+
+    return await response.json();
+}

@@ -16,7 +16,7 @@ export default function MovieReviews({ movie }) {
 
       const { data, error, isPending, isError } = useQuery({
     queryKey: ['reviews', { id: movie.id }],
-    queryFn: getMovieReviews,
+    queryFn: () => getMovieReviews(movie.id),
   });
   
   if (isPending) {
