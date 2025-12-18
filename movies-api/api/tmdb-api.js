@@ -135,7 +135,7 @@ export const getMovieReviews = async (id) => {
         `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
     )
 
-        if (!response.ok) {
+    if (!response.ok) {
         const errorData = await response.json();
         throw new Error (errorData.status_message || 'Failed to fetch reviews');
     }
@@ -166,5 +166,18 @@ export const addToFavourites = async (movie) => {
     }
 
     return await response.json();
-    
 };
+
+//Get Favourites
+export const getFavourites = async () => {
+    const response = await fetch (
+        `http://localhost:8080/api/favorites`
+    )
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch reviews');
+    }
+
+    return await response.json();
+}

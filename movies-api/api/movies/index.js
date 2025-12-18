@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { getMovies } from '../tmdb-api'; 
+import { getFavourites, getMovies } from '../tmdb-api'; 
 import { getMovie } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';
 import { getUpcoming } from '../tmdb-api';
@@ -43,9 +43,15 @@ router.get('/genres', asyncHandler(async (req, res) => {
 }));
 
 //Upcoming Movies
-router.get('/now-playing', asyncHandler(async (req, res) => {
+router.get('/upcoming', asyncHandler(async (req, res) => {
     const upcomingMovies = await getUpcoming();
     res.status(200).json(upcomingMovies);
+}));
+
+//Now playing Movies
+router.get('/now-playing', asyncHandler(async (req, res) => {
+    const nowPlaying = await getCurrentlyShowing();
+    res.status(200).json(nowPlaying);
 }));
 
 //Top Rated
@@ -95,6 +101,12 @@ router.post('/favorites', asyncHandler (async (req, res) => {
         favorite,
         message: "Favourite added",
     });
+}));
+
+//Get favourites
+router.get('/favorites', asyncHandler (async(req, res) => {
+    const favMovies = await getFavourites();
+    res.status(200).json(favMovies);
 }))
 
 export default router;
