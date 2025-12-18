@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { getMovies } from '../tmdb-api'; 
+import { addToFavourites, getMovies } from '../tmdb-api'; 
 import { getMovie } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';
 import { getUpcoming } from '../tmdb-api';
@@ -78,5 +78,15 @@ router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
     const movieReviews = await getMovieReviews(id);
     res.status(200).json(movieReviews);
 }));
+
+//Add to favourites
+router.post('/favourites', asyncHandler (async (req, res) => {
+    const { movieId } = req.body;
+
+    res.status(201).json({
+        movieId,
+        message: "Favourite added",
+    });
+}))
 
 export default router;

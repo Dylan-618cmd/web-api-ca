@@ -142,3 +142,23 @@ export const getMovieReviews = async (id) => {
 
     return await response.json();
 }
+
+//Add to favourites
+export const addToFavourites = async (movieId) => {
+    const response = await fetch (
+        `http://localhost:8080/api/favourites`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({movieId})
+        }
+    );
+        if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch reviews');
+    }
+
+    return await response.json();
+    
+}
