@@ -141,17 +141,23 @@ export const getMovieReviews = async (id) => {
     }
 
     return await response.json();
-}
+};
 
 //Add to favourites
-export const addToFavourites = async (movieId) => {
+export const addToFavourites = async (movie) => {
     const response = await fetch (
-        `http://localhost:8080/api/favourites`, {
+        `http://localhost:8080/api/favorites`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({movieId})
+            body: JSON.stringify({
+                movieId: movie.id,
+                title: movie.title,
+                genres: movie.genres,
+                poster_path: movie.poster_path,
+                release_date: movie.release_date
+            }),
         }
     );
         if (!response.ok) {
@@ -161,4 +167,4 @@ export const addToFavourites = async (movieId) => {
 
     return await response.json();
     
-}
+};

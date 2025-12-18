@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { addToFavourites, getMovies } from '../tmdb-api'; 
+import { getMovies } from '../tmdb-api'; 
 import { getMovie } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';
 import { getUpcoming } from '../tmdb-api';
@@ -10,6 +10,7 @@ import { getRecommended } from '../tmdb-api';
 import { getCurrentlyShowing } from '../tmdb-api';
 import { getMovieImages } from '../tmdb-api';
 import { getMovieReviews } from '../tmdb-api';
+import { addToFavourites } from '../tmdb-api';
 
 
 const router = express.Router();
@@ -66,12 +67,6 @@ router.get('/:id/recommendations', asyncHandler (async (req, res) => {
     res.status(200).json(recommendedMovies);
 }));
 
-//Currently Showing
-router.get('/now-playing', asyncHandler (async (erq, res) => {
-    const nowPlaying = await getCurrentlyShowing();
-    res.status(200).json(nowPlaying);
-}));
-
 //Movie Reviews
 router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
     const {id} = req.params;
@@ -80,11 +75,24 @@ router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
 }));
 
 //Add to favourites
-router.post('/favourites', asyncHandler (async (req, res) => {
-    const { movieId } = req.body;
+router.post('/favorites', asyncHandler (async (req, res) => {
+    const { movieId,
+            title,
+            genres, 
+            poster_path, 
+            release_date
+        } = req.body;
+
+        const favorite = {
+        movieId,
+        title,
+        genres,
+        poster_path,
+        release_date
+    };
 
     res.status(201).json({
-        movieId,
+        favorite,
         message: "Favourite added",
     });
 }))
