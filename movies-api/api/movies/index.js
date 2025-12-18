@@ -59,8 +59,9 @@ router.get('/popular', asyncHandler(async (req, res) => {
 }));
 
 //Recommended Movies
-router.get('/recommended', asyncHandler (async (req, res) => {
-    const recommendedMovies = await getRecommended();
+router.get('/:id/recommendations', asyncHandler (async (req, res) => {
+    const {id} = req.params;
+    const recommendedMovies = await getRecommended(id);
     res.status(200).json(recommendedMovies);
 }));
 

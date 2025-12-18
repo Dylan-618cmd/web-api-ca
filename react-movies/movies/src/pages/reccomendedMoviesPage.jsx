@@ -11,7 +11,7 @@ const RecommendedPage = () => {
  
   const { data, error, isPending, isError  } = useQuery({
     queryKey: ['recommendations', {id: id}],
-    queryFn: getRecommended,
+    queryFn: () => getRecommended(id),
   })
 
   if (isPending) {

@@ -44,6 +44,20 @@ export const getMovieImages = async (id) => {
 
 }
 
+//Get Reccomended Movies
+export const getRecommended = async (id) => {
+    const response = await fetch (
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+    );
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error (errorData.status_message || 'Failed to fetch recommended movies');
+    }
+
+    return await response.json();
+}
+
 //Genres
 export const getGenres = async () => {
     const response = await fetch (
@@ -91,20 +105,6 @@ export const getTopRated = async () => {
 export const getPopular = async () => {
     const response = await fetch (
         `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-    );
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error (errorData.status_message || 'Failed to fetch popular movies');
-    }
-
-    return await response.json();
-}
-
-//Get Reccomended Movies
-export const getRecommended = async () => {
-    const response = await fetch (
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.VITE_TMDB_KEY}&language=en-US&page=1`
     );
 
     if (!response.ok) {

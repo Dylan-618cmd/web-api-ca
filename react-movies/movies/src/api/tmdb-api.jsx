@@ -136,9 +136,9 @@ export const getPopular = async () => {
 };
 
 //Recommended Movies
-export const getRecommended = async () => {
+export const getRecommended = async (id) => {
   return fetch(
-    `http://localhost:8080/api/movies/recommended`
+    `http://localhost:8080/api/movies/${id}/recommendations`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
