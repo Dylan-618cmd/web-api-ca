@@ -8,17 +8,12 @@ import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
-  const {favorites: movieIds } = useContext(MoviesContext);
-
-  // Create an array of queries and run in parallel.
+ 
   const { data: favourites, isLoading, error } = useQuery({
   queryKey: ['favourites'],
   queryFn: getFavourites,  
 });
   
-  // Check if any of the parallel queries is still loading.
-  const isPending = favoriteMovieQueries.find((m) => m.isPending === true);
-
   if (isPending) {
     return <Spinner />;
   }

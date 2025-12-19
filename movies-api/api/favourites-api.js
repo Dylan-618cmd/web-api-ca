@@ -26,7 +26,7 @@ export const addToFavourites = async (movie) => {
 //Get Favourites
 export const getFavourites = async () => {
     const response = await fetch (
-        `http://localhost:8080/api/favourites`
+        `http://localhost:8080/api/movies/favourites`
     )
 
     if (!response.ok) {
