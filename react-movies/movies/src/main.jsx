@@ -38,6 +38,7 @@ const App = () => {
       <MoviesContextProvider>
       <BrowserRouter>
         <AuthContextProvider>
+          <SiteHeader />
           <div className="container">
             <h1>Movies</h1>
             <Routes>
@@ -46,7 +47,7 @@ const App = () => {
               <Route path="/signup" element={< SignUpPage />} />
               <Route path="/profile" element={< ProfilePage />} />
               <Route element={<ProtectedRoutes />}>
-                  <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                  <Route path="/movies/favourites" element={<FavoriteMoviesPage />} />
                   <Route path="/movies/upcoming" element={<UpcomingMoviesPage /> } />
                   <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
                   <Route path="/movies/:id" element={<MoviePage />} />
