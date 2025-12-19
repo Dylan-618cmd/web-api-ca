@@ -15,6 +15,9 @@ import { addToFavourites } from '../tmdb-api';
 
 const router = express.Router();
 
+//Store favourites in an arry for now
+let favourites = [];
+
 // movie routes to be added
 router.get('/discover', asyncHandler(async (req, res) => {
     const discoverMovies = await getMovies();
@@ -81,7 +84,7 @@ router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
 }));
 
 //Add to favourites
-router.post('/favorites', asyncHandler (async (req, res) => {
+router.post('/favourites', asyncHandler (async (req, res) => {
     const { movieId,
             title,
             genres, 
@@ -89,7 +92,7 @@ router.post('/favorites', asyncHandler (async (req, res) => {
             release_date
         } = req.body;
 
-        const favorite = {
+        const favourite = {
         movieId,
         title,
         genres,
@@ -97,16 +100,17 @@ router.post('/favorites', asyncHandler (async (req, res) => {
         release_date
     };
 
+    favourites.push(favourite);
+
     res.status(201).json({
-        favorite,
+        favourite,
         message: "Favourite added",
     });
 }));
 
 //Get favourites
-router.get('/favorites', asyncHandler (async(req, res) => {
-    const favMovies = await getFavourites();
-    res.status(200).json(favMovies);
+router.get('/favourites', asyncHandler (async(req, res) => {
+    res.status(200).json(favourites);
 }))
 
 export default router;

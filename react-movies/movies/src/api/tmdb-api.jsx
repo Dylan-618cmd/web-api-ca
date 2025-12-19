@@ -167,6 +167,23 @@ export const getCurrentlyShowing = async () => {
  });
 };
 
+//Get Favourites
+//Get Favourites
+export const getFavourites = async () => {
+  return fetch('http://localhost:8080/api/movies/favourites')
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Failed to fetch favourites");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
 //Logins and signups
 export const login = async (username, password) => {
     const response = await fetch('http://localhost:8080/api/users', {
