@@ -19,9 +19,19 @@ const router = express.Router();
 let favourites = [];
 
 // movie routes to be added
+//router.get('/discover', asyncHandler(async (req, res) => {
+//    const discoverMovies = await getMovies();
+//    res.status(200).json(discoverMovies);
+//}));
+
 router.get('/discover', asyncHandler(async (req, res) => {
+  try {
     const discoverMovies = await getMovies();
     res.status(200).json(discoverMovies);
+  } catch (error) {
+    console.error(error); // optional, logs the real error
+    res.status(500).json({ message: error.message || "Something went wrong" });
+  }
 }));
 
 //Individual Movies

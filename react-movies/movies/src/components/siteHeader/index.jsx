@@ -25,9 +25,10 @@ const SiteHeader = () => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    {label: "Sign Up", path: "/signUp"},
-    { label: "Log In", path: "/login"}
-    { label: "Home", path: "/movies/discover" },
+    { label: "Home Page", path: "/"},
+    { label: "Sign Up", path: "/signUp"},
+    { label: "Log In", path: "/login"},
+    { label: "Discover", path: "/movies/discover" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/top-rated" },

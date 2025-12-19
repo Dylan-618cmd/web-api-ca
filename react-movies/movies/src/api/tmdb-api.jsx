@@ -168,7 +168,6 @@ export const getCurrentlyShowing = async () => {
 };
 
 //Get Favourites
-//Get Favourites
 export const getFavourites = async () => {
   return fetch('http://localhost:8080/api/movies/favourites')
     .then((response) => {
