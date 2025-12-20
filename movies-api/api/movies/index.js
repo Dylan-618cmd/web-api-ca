@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { getFavourites, getMovies } from '../tmdb-api'; 
+import { getMovies } from '../tmdb-api'; 
 import { getMovie } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';
 import { getUpcoming } from '../tmdb-api';
@@ -11,6 +11,7 @@ import { getCurrentlyShowing } from '../tmdb-api';
 import { getMovieImages } from '../tmdb-api';
 import { getMovieReviews } from '../tmdb-api';
 import { addToFavourites } from '../tmdb-api';
+import { getFavourites } from '../favourites-api';
 
 
 const router = express.Router();
@@ -19,20 +20,11 @@ const router = express.Router();
 let favourites = [];
 
 // movie routes to be added
-//router.get('/discover', asyncHandler(async (req, res) => {
-//    const discoverMovies = await getMovies();
-//    res.status(200).json(discoverMovies);
-//}));
-
 router.get('/discover', asyncHandler(async (req, res) => {
-  try {
     const discoverMovies = await getMovies();
     res.status(200).json(discoverMovies);
-  } catch (error) {
-    console.error(error); // optional, logs the real error
-    res.status(500).json({ message: error.message || "Something went wrong" });
-  }
 }));
+
 
 //Individual Movies
 router.get('/movie/:id', asyncHandler(async (req, res) => {
@@ -94,32 +86,20 @@ router.get('/movie/:id/reviews', asyncHandler (async (req, res) => {
 }));
 
 //Add to favourites
-router.post('/favourites', asyncHandler (async (req, res) => {
-    const { movieId,
-            title,
-            genres, 
-            poster_path, 
-            release_date
-        } = req.body;
+router.post('/movie/favorites', asyncHandler (async (req, res) => {
+    const movie = req.body;
 
-        const favourite = {
-        movieId,
-        title,
-        genres,
-        poster_path,
-        release_date
-    };
-
-    favourites.push(favourite);
+    favourites.push(movie);
 
     res.status(201).json({
-        favourite,
-        message: "Favourite added",
+        movie,
+        message: "Favourite Added",
     });
 }));
 
 //Get favourites
-router.get('/favourites', asyncHandler (async(req, res) => {
+router.get('/favorites', asyncHandler (async(req, res) => {
+    const favourites = await getFavourites(movie);
     res.status(200).json(favourites);
 }))
 

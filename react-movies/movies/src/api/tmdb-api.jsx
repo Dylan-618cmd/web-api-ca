@@ -16,7 +16,6 @@ export const getMovies = () => {
 
 //Single Movie Details
 export const getMovie = (id) => {
-  console.log("getMovie called with:", id, typeof id);
   return fetch(
     `http://localhost:8080/api/movies/movie/${id}`
   ).then((response) => {
@@ -171,6 +170,7 @@ export const getCurrentlyShowing = async () => {
 export const getFavourites = async () => {
   return fetch('http://localhost:8080/api/movies/favourites')
     .then((response) => {
+
       if (!response.ok) {
         return response.json().then((error) => {
           throw new Error(error.status_message || "Failed to fetch favourites");

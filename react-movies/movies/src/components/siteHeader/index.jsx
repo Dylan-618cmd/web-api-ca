@@ -38,7 +38,7 @@ const SiteHeader = () => {
 
   const privateMenuOptions = [
     { label: "Discover", path: "/movies/discover" },
-    { label: "Favorites", path: "/movies/favorites" },
+    { label: "Favorites", path: "/movies/favourites" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/top-rated" },
     { label: "Now Playing", path: "/movies/now-playing"},
