@@ -12,6 +12,8 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import "../../styles/headerStyle.css"
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -19,22 +21,35 @@ const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const {isAuthenticated} = useContext(AuthContext)
+
+  let menuOptions;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
   const navigate = useNavigate();
 
-  const menuOptions = [
+  const publicMenuOptions = [
     { label: "Home Page", path: "/"},
     { label: "Sign Up", path: "/signUp"},
     { label: "Log In", path: "/login"},
     { label: "Discover", path: "/movies/discover" },
+  ];
+
+  const privateMenuOptions = [
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/top-rated" },
     { label: "Now Playing", path: "/movies/now-playing"},
     { label: "Popular", path: "movies/popular"},
-  ];
+  ]
+
+  if (isAuthenticated) {
+    menuOptions = privateMenuOptions;
+  } else {
+    menuOptions = publicMenuOptions
+  }
 
   const handleMenuSelect = (pageURL) => {
     setAnchorEl(null);
