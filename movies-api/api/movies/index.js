@@ -16,9 +16,6 @@ import { getFavourites } from '../favourites-api';
 
 const router = express.Router();
 
-//Store favourites in an arry for now
-let favourites = [];
-
 // movie routes to be added
 router.get('/discover', asyncHandler(async (req, res) => {
     const discoverMovies = await getMovies();
