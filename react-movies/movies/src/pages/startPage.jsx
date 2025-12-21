@@ -11,7 +11,7 @@ const StartPage = () => {
         </p>
     ) : (
         <p>
-            <Link to="/login">Login</Link> or <Link to="/signup">Signup</Link> to create tasks!
+            <Link to="/login">Login</Link> or <Link to="/signup">Signup</Link> to view the app!
         </p>
     );
   };

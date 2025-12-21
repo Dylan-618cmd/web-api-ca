@@ -123,7 +123,7 @@ export const getCurrentlyShowing = async () => {
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error (errorData.status_message || 'Failed to fetch popular movies');
+        throw new Error (errorData.status_message || 'Failed to fetch new movies');
     }
 
     return await response.json();
